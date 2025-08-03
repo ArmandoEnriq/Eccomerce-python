@@ -1,0 +1,1 @@
+# Marca el directorio como un paquete Python (para poder importar módulos desde otros archivos).
