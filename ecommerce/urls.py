@@ -41,6 +41,8 @@ urlpatterns = [
     
     path('store/', include('store.urls')),
     
+    path('cart/', include('carts.urls')),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 # La línea anterior solo funciona en modo DEBUG=True y sirve para:
 # - Mostrar archivos multimedia (MEDIA_URL) durante el desarrollo

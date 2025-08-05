@@ -22,3 +22,26 @@ class Product(models.Model): # Definimos la clase Product que hereda de models.M
 
     def __str__(self):
         return self.product_name
+    
+    
+class VariationManager(models.Manager): # Creamos un manager personalizado para la clase Variation
+    def colors(self): # Método para obtener las variaciones de color
+        return super(VariationManager, self).filter(variation_category='color', is_active=True) # Devuelve las variaciones de color activas
+    def tallas(self): # Método para obtener las variaciones de talla
+        return super(VariationManager, self).filter(variation_category='talla', is_active=True) # Devuelve las variaciones de talla activas
+
+    
+class Variation(models.Model): # Creamos la clase variations para representar las variaciones de un producto
+    product = models.ForeignKey(Product, on_delete=models.CASCADE) # creamos una llave foranea a la clase Product
+    variation_category = models.CharField(max_length=100, choices=(
+        ('color', 'color'),
+        ('talla', 'talla'),
+    )) # Creamos un campo para la categoría de la variación
+    variation_value = models.CharField(max_length=100) # Creamos un campo para el valor de la variación
+    is_active = models.BooleanField(default=True) # Creamos un campo para indicar si la variación es activa
+    created_date = models.DateTimeField(auto_now_add=True) # Creamos un campo para la fecha de creación
+    
+    objects = VariationManager()
+
+    def __unicode__(self):
+        return self.product  # Retorna el nombre del producto como representación de la variación

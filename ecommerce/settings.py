@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'category',  # App para manejar categorías de productos
     'accounts',  # App para manejo de usuarios y autenticación
     'store',     # App principal para la tienda/comercio electrónico
+    'carts',      # App para el carrito de compras
 ]
 
 # Middleware - componentes que procesan requests/responses globalmente
@@ -67,6 +68,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',     # Info de autenticación
                 'django.contrib.messages.context_processors.messages',  # Sistema de mensajes
                 'category.context_processors.menu_links',  # Procesador de contexto personalizado para categorías
+                'carts.context_processors.counter',
             ],
         },
     },
