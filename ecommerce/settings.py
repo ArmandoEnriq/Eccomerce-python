@@ -133,6 +133,17 @@ STATICFILES_DIRS = [    # Lista de directorios adicionales donde Django buscará
 MEDIA_URL = '/media/'  # URL base para acceder a archivos subidos por usuarios
 MEDIA_ROOT = BASE_DIR / 'media'  # Ruta en el sistema de archivos donde se guardan los archivos subidos
 
+from django.contrib.messages import constants as messages  # Importamos constantes de mensajes
+MESSAGE_TAGS = {  # Configuración de etiquetas de mensajes
+    messages.ERROR: 'danger',  # Cambia el color de los mensajes de error
+}
+
+# settings.py
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Configuración de backend de correo para desarrollo en consola
+
+
+
+
 # Tipo de campo automático por defecto para modelos
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'  # Usa campos AutoField grandes (64 bits)

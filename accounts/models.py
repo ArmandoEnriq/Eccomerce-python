@@ -53,7 +53,7 @@ class Account(AbstractBaseUser): # Creamos la clase Account que hereda de Abstra
     last_login = models.DateTimeField(auto_now=True) # Fecha del último inicio de sesión
     is_admin = models.BooleanField(default=False) # Campo para verificar si el usuario es administrador
     is_staff = models.BooleanField(default=False) # Campo para verificar si el usuario es miembro del personal
-    is_active = models.BooleanField(default=True) # Campo para verificar si el usuario está activo
+    is_active = models.BooleanField(default=False) # Campo para verificar si el usuario está activo
     is_superadmin = models.BooleanField(default=False) # Campo para verificar si el usuario es superadministrador
     
     USERNAME_FIELD = 'email' # Definimos el campo que se usará para iniciar sesión

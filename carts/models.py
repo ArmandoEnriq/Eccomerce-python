@@ -1,5 +1,5 @@
 from django.db import models
-from store.models import Product
+from store.models import Product, Variation
 # Create your models here.
 
 class Cart(models.Model):
@@ -19,6 +19,7 @@ class CartItem(models.Model):
     Cada CartItem está asociado a un Cart y a un Product.
     """
     product = models.ForeignKey(Product, on_delete=models.CASCADE)  # Producto asociado
+    variations= models.ManyToManyField(Variation, blank=True) # Crea una relacion muchos a muchos con la tabla Variation
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)  # Carrito al que pertenece
     quantity = models.IntegerField()  # Cantidad del producto en el carrito
     is_active = models.BooleanField(default=True)  # Indica si el item está activo

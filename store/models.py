@@ -24,24 +24,24 @@ class Product(models.Model): # Definimos la clase Product que hereda de models.M
         return self.product_name
     
     
-class VariationManager(models.Manager): # Creamos un manager personalizado para la clase Variation
+class VariationManager(models.Manager): # Creamos un manager personalizado para la clase Variation es como anexarle metodos personalizados a la clase Variation los cuales seran bucar por color y talla
     def colors(self): # Método para obtener las variaciones de color
-        return super(VariationManager, self).filter(variation_category='color', is_active=True) # Devuelve las variaciones de color activas
+        return super(VariationManager, self).filter(variation_category='color', is_active=True) # Con super() accedemos al manager de la clase padre (Variation) y con filter() obtenemos las variaciones de color activas.Devuelve las variaciones de color activas
     def tallas(self): # Método para obtener las variaciones de talla
         return super(VariationManager, self).filter(variation_category='talla', is_active=True) # Devuelve las variaciones de talla activas
 
     
-class Variation(models.Model): # Creamos la clase variations para representar las variaciones de un producto
+class Variation(models.Model): # Creamos un modelo Variation el cual editaremos su manager a uno personalizado
     product = models.ForeignKey(Product, on_delete=models.CASCADE) # creamos una llave foranea a la clase Product
     variation_category = models.CharField(max_length=100, choices=(
         ('color', 'color'),
         ('talla', 'talla'),
-    )) # Creamos un campo para la categoría de la variación
+    )) # Definimos categorias con opciones, es una tupla ya que el primer elemento es el se guardara en la BD y el segundo es el valor es el que se mostrara en el admin
     variation_value = models.CharField(max_length=100) # Creamos un campo para el valor de la variación
     is_active = models.BooleanField(default=True) # Creamos un campo para indicar si la variación es activa
     created_date = models.DateTimeField(auto_now_add=True) # Creamos un campo para la fecha de creación
     
-    objects = VariationManager()
+    objects = VariationManager() # Creamos un manager personalizado para la clase Variation lo que hace es que podemos acceder a los métodos personalizados de la clase VariationManager desde la clase Variation
 
-    def __unicode__(self):
-        return self.product  # Retorna el nombre del producto como representación de la variación
+    def __str__(self):
+        return self.variation_category + ':' + self.variation_value  # Retorna el nombre del producto como representación de la variación
